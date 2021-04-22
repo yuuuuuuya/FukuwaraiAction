@@ -1,0 +1,48 @@
+﻿<Properties StartupConfiguration="{8A5E0906-F834-16ED-C13F-C4AF2966F36D}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/OnTriggerSample.cs">
+    <Files>
+      <File FileName="Assets/Joystick Pack/Scripts/Joysticks/VariableJoystick.cs" Line="6" Column="33" />
+      <File FileName="Assets/Joystick Pack/Examples/JoystickPlayerExample.cs" Line="16" Column="2" />
+      <File FileName="Assets/Joystick Pack/Scripts/Base/Joystick.cs" Line="1" Column="1" />
+      <File FileName="Assets/Joystick Pack/Scripts/Editor/JoystickEditor.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="43" Column="1" />
+      <File FileName="Assets/OnTriggerSample.cs" Line="32" Column="37" />
+      <File FileName="Assets/MaterialChange.cs" Line="13" Column="27" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="LikeHFF" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Joystick Pack" expanded="True">
+                <Node name="Examples" expanded="True" />
+                <Node name="Scripts" expanded="True">
+                  <Node name="Base" expanded="True" />
+                  <Node name="Editor" expanded="True" />
+                  <Node name="Joysticks" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="Scripts" expanded="True" />
+              <Node name="OnTriggerSample.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="LikeHFF" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="8d4ce1d5-4b70-4b70-b615-7c2cdae51d3d" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

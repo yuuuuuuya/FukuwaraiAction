@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/TitleScene.unity
+    guid: 8c98a8ccee2ab4d749e78957e95f95e5
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 13df035ef13b443c094bd19fb9b3c73c
+  - enabled: 1
+    path: Assets/Scenes/MouthScene.unity
+    guid: acf018d59ec6f419983c87c190497aa3
+  - enabled: 1
+    path: Assets/Scenes/LeftEyeScene.unity
+    guid: f0eef4357af7e491eb79551d047acba7
+  - enabled: 1
+    path: Assets/Scenes/NoseScene.unity
+    guid: 31a90e941100648519f7562076c2d425
+  - enabled: 1
+    path: Assets/Scenes/RightEyeScene.unity
+    guid: 4de02402d98784e83bc153174d996616
+  - enabled: 1
+    path: Assets/Scenes/MnagerScene.unity
+    guid: 28d0fc899717f4c869b808182550bfa3
+  m_configObjects: {}
