@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour
+public class Player : MonoBehaviour
 {
     Rigidbody rb;
     [SerializeField] float jumpForce;
@@ -47,15 +47,15 @@ public class PlayerController : MonoBehaviour
         //顔のパーツに触れた
         bool isAttachedFaceParts = false;
         //顔のパーツのスクリプト
-        FacePartsController facePartsController;
+        FaceParts facePartsScript;
 
         //衝突した顔のパーツによってpositinを変更
         switch (other.tag)
         {
             case "LeftEye":
                 //顔パーツの回転を停止
-                facePartsController = other.gameObject.GetComponent<FacePartsController>();
-                facePartsController.enabled = false;
+                facePartsScript = other.gameObject.GetComponent<FaceParts>();
+                facePartsScript.enabled = false;
 
                 //顔のパーツをplayerにセット
                 other.GetComponent<MeshCollider>().enabled = false;
@@ -70,8 +70,8 @@ public class PlayerController : MonoBehaviour
                 break;
             case "RightEye":
                 //顔パーツの回転を停止
-                facePartsController = other.gameObject.GetComponent<FacePartsController>();
-                facePartsController.enabled = false;
+                facePartsScript = other.gameObject.GetComponent<FaceParts>();
+                facePartsScript.enabled = false;
 
                 other.GetComponent<MeshCollider>().enabled = false;
                 facePartsPos = new Vector3(-0.17f, 0.05f, 0.52f);
@@ -84,8 +84,8 @@ public class PlayerController : MonoBehaviour
                 break;
             case "Nose":
                 //顔パーツの回転を停止
-                facePartsController = other.gameObject.GetComponent<FacePartsController>();
-                facePartsController.enabled = false;
+                facePartsScript = other.gameObject.GetComponent<FaceParts>();
+                facePartsScript.enabled = false;
 
                 other.GetComponent<MeshCollider>().enabled = false;
                 facePartsPos = new Vector3(-0.03f, -0.14f, 0.52f);
@@ -98,8 +98,8 @@ public class PlayerController : MonoBehaviour
                 break;
             case "Mouth":
                 //顔パーツの回転を停止
-                facePartsController = other.gameObject.GetComponent<FacePartsController>();
-                facePartsController.enabled = false;
+                facePartsScript = other.gameObject.GetComponent<FaceParts>();
+                facePartsScript.enabled = false;
 
                 other.GetComponent<MeshCollider>().enabled = false;
                 facePartsPos = new Vector3(-0.03f, -0.33f, 0.52f);

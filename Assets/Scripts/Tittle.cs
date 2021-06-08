@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TittleController : MonoBehaviour
+public class Tittle : MonoBehaviour
 {
     public void OnStartButtonClicked()
     {

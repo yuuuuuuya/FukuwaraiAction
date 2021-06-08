@@ -26,15 +26,15 @@ public class ManagerSceneLoader : MonoBehaviour
             if (rootGameObject.name != "Player") continue;
             if (rootGameObject.transform.position.y <= -10)
             {
-                PlayerController playerController = rootGameObject.GetComponent<PlayerController>();
-                playerController.life--;
+                Player Player = rootGameObject.GetComponent<Player>();
+                Player.life--;
 
-                if (playerController.life == 0)
+                if (Player.life == 0)
                 {
                     isloaded = false;
                     SceneManager.LoadScene("TitleScene");
                 }
-                else if (playerController.life >= 1)
+                else if (Player.life >= 1)
                 {
                     SceneManager.UnloadSceneAsync(sceneName);
                     SceneManager.LoadScene("MainScene", LoadSceneMode.Additive);

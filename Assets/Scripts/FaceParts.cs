@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class FacePartsController : MonoBehaviour
+public class FaceParts : MonoBehaviour
 {
     [SerializeField] string sceneName;
     AudioSource audioSource;
@@ -12,11 +12,11 @@ public class FacePartsController : MonoBehaviour
     {
         //各シーンで顔パーツを取得済みなら顔パーツobjectを非表示
         Scene managerScene = SceneManager.GetSceneByName("MnagerScene");
-        PlayerController player;
+        Player player;
 
         foreach (GameObject rootGameObject in managerScene.GetRootGameObjects())
         {
-            player = rootGameObject.GetComponent<PlayerController>();
+            player = rootGameObject.GetComponent<Player>();
             if (player == null) continue;
             switch (sceneName)
             {

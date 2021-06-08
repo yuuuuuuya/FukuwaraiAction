@@ -36,16 +36,21 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\CubePeopleDemo\Scripts\AnimationController.cs" />
+     <Compile Include="Assets\CubePeopleDemo\Scripts\CubePeopleTraffic.cs" />
+     <Compile Include="Assets\CubePeopleDemo\Scripts\EightDirectionMovement.cs" />
+     <Compile Include="Assets\CubePeopleDemo\Scripts\FollowTarget.cs" />
      <Compile Include="Assets\Firework\RotateFlareHolder.cs" />
-     <Compile Include="Assets\Scripts\FacePartsController.cs" />
+     <Compile Include="Assets\Scripts\FaceParts.cs" />
      <Compile Include="Assets\Scripts\FacePartsPanel.cs" />
      <Compile Include="Assets\Scripts\FacePartsSceneMovement.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\LifePanel.cs" />
      <Compile Include="Assets\Scripts\MainSceneMovement.cs" />
      <Compile Include="Assets\Scripts\ManagerSceneLoader.cs" />
-     <Compile Include="Assets\Scripts\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\TittleController.cs" />
+     <Compile Include="Assets\Scripts\Player.cs" />
+     <Compile Include="Assets\Scripts\Tittle.cs" />
+     <None Include="Assets\CubePeopleDemo\Readme.txt" />
      <None Include="Assets\Firework\Helpers\readme.txt" />
      <None Include="Assets\Shaders\UnlitShader_cullOff.shader" />
     <Reference Include="UnityEngine">
