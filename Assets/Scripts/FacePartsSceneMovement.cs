@@ -12,10 +12,10 @@ public class FacePartsSceneMovement : MonoBehaviour
         //顔パーツを取得済みのFacePartsSpherは色を変更
         Material material = GetComponent<Renderer>().material;
         Scene managerScene = SceneManager.GetSceneByName("MnagerScene");
-        PlayerController player;
+        Player player;
         foreach (GameObject rootGameObject in managerScene.GetRootGameObjects())
         {
-            player = rootGameObject.GetComponent<PlayerController>();
+            player = rootGameObject.GetComponent<Player>();
             if (player == null) continue;
             switch (sceneName)
             {

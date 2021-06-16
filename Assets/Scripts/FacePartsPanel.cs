@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FacePartsPanel : MonoBehaviour
 {
-    [SerializeField] PlayerController player;
+    [SerializeField] Player player;
     [SerializeField] GameObject leftEye;
     [SerializeField] GameObject rightEye;
     [SerializeField] GameObject nose;

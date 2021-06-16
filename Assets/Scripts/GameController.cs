@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] PlayerController player;
+    [SerializeField] Player player;
     [SerializeField] LifePanel lifePanel;
     [SerializeField] FacePartsPanel facePartsPanel;
 
