@@ -439,8 +439,10 @@ GameObject:
   - component: {fileID: 2740680896289987566}
   - component: {fileID: 2740680896289987560}
   - component: {fileID: 7517954708247129620}
+  - component: {fileID: 1198923632906301590}
+  - component: {fileID: 8071746746382887519}
   m_Layer: 0
-  m_Name: Ch_0CP01F00R
+  m_Name: PlayerCharactor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -537,6 +539,42 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1198923632906301590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2740680896289987563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 262da11d95041f04c9183f639fb25d94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minmaxSpeed: {x: 0.5, y: 1.5}
+  playerState: 0
+  refreshDestination: 0
+  pauseTime: 1
+  targetPoint: 0
+  destinationFolder: {fileID: 0}
+--- !u!114 &8071746746382887519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2740680896289987563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 262da11d95041f04c9183f639fb25d94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minmaxSpeed: {x: 0.5, y: 1.5}
+  playerState: 0
+  refreshDestination: 0
+  pauseTime: 1
+  targetPoint: 0
+  destinationFolder: {fileID: 0}
 --- !u!1 &2740680896307097172
 GameObject:
   m_ObjectHideFlags: 0
