@@ -6,39 +6,33 @@ using UnityEngine.SceneManagement;
 public class FacePartsSceneMovement : MonoBehaviour
 {
     [SerializeField] string sceneName;
+    Material facePartsSpherMaterial;
 
     void Start()
     {
         //顔パーツを取得済みのFacePartsSpherは色を変更
-        Material material = GetComponent<Renderer>().material;
-        Scene managerScene = SceneManager.GetSceneByName("MnagerScene");
-        Player player;
-        foreach (GameObject rootGameObject in managerScene.GetRootGameObjects())
+        facePartsSpherMaterial = GetComponent<Renderer>().material;
+        switch (sceneName)
         {
-            player = rootGameObject.GetComponent<Player>();
-            if (player == null) continue;
-            switch (sceneName)
-            {
-                case "LeftEyeScene":
-                    if (player.hasAttachedLeftEye) material.color = Color.red;
-                    break;
-                case "RightEyeScene":
-                    if (player.hasAttachedRightEye) material.color = Color.red;
-                    break;
-                case "NoseScene":
-                    if (player.hasAttachedNose) material.color = Color.red;
-                    break;
-                case "MouthScene":
-                    if (player.hasAttachedMouth) material.color = Color.red;
-                    break;
-                default:
-                    break;
-            }
+            case "LeftEyeScene":
+                if (FaceParts.hasAttachedLeftEye) facePartsSpherMaterial.color = Color.red;
+                break;
+            case "RightEyeScene":
+                if (FaceParts.hasAttachedRightEye) facePartsSpherMaterial.color = Color.red;
+                break;
+            case "NoseScene":
+                if (FaceParts.hasAttachedNose) facePartsSpherMaterial.color = Color.red;
+                break;
+            case "MouthScene":
+                if (FaceParts.hasAttachedMouth) facePartsSpherMaterial.color = Color.red;
+                break;
+            default:
+                break;
         }
     }
-
     void OnTriggerEnter()
     {
+        // シーンの切り替え
         SceneManager.UnloadSceneAsync("MainScene");
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
     }

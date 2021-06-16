@@ -18,10 +18,6 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject restartBtn;
     [SerializeField] GameObject player;
     public bool isGoal { get; set; } = false;
-    public bool hasAttachedRightEye { get; set; } = false;
-    public bool hasAttachedLeftEye { get; set; } = false;
-    public bool hasAttachedNose { get; set; } = false;
-    public bool hasAttachedMouth { get; set; } = false;
     public int life { get; set; } = 3;
     //FacePartsSpereに衝突時の効果音
     AudioSource audioSource;
@@ -83,7 +79,7 @@ public class Player : MonoBehaviour
 
                 //各フラグを変更
                 isAttachedFaceParts = true;
-                hasAttachedLeftEye = true;
+                FaceParts.hasAttachedLeftEye = true;
                 break;
             case "RightEye":
                 //顔パーツの回転を停止
@@ -97,7 +93,7 @@ public class Player : MonoBehaviour
                 facePartsRot = Quaternion.Euler(0.0f, 180.0f, facePartsRotVector3.z);
 
                 isAttachedFaceParts = true;
-                hasAttachedRightEye = true;
+                FaceParts.hasAttachedRightEye = true;
                 break;
             case "Nose":
                 //顔パーツの回転を停止
@@ -111,7 +107,7 @@ public class Player : MonoBehaviour
                 facePartsRot = Quaternion.Euler(0.0f, 180.0f, facePartsRotVector3.z);
 
                 isAttachedFaceParts = true;
-                hasAttachedNose = true;
+                FaceParts.hasAttachedNose = true;
                 break;
             case "Mouth":
                 //顔パーツの回転を停止
@@ -125,7 +121,7 @@ public class Player : MonoBehaviour
                 facePartsRot = Quaternion.Euler(0.0f, 180.0f, facePartsRotVector3.z);
 
                 isAttachedFaceParts = true;
-                hasAttachedMouth = true;
+                FaceParts.hasAttachedMouth = true;
                 break;
             case "ReturnMainSphere":
                 audioSource.Play();
