@@ -11,6 +11,7 @@ public class FacePartsPanel : MonoBehaviour
 
     public void UpdateFacePartsIcons()
     {
+        // 取得したら顔パーツを非表示
         if (FaceParts.hasAttachedLeftEye) leftEye.SetActive(false);
         if (FaceParts.hasAttachedRightEye) rightEye.SetActive(false);
         if (FaceParts.hasAttachedNose) nose.SetActive(false);

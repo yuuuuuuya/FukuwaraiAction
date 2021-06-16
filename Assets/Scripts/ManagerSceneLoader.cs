@@ -10,7 +10,8 @@ public class ManagerSceneLoader : MonoBehaviour
 
     void Awake()
     {
-        //デバッグ用
+        // デバッグ用
+        // 各Stageシーンでゲーム開始→Managerシーンをロード
         if (isloaded) return;
         SceneManager.LoadScene("MnagerScene", LoadSceneMode.Additive);
         isloaded = true;

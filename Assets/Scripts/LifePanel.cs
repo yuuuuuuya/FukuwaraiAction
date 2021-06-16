@@ -9,6 +9,7 @@ public class LifePanel : MonoBehaviour
 
     public void UpdateLifeIcons(int life)
     {
+        // 残ライフをUIで表示
         for (int i = 0; i < lifeIcons.Length; i++)
         {
             if (i < life) lifeIcons[i].SetActive(true);
