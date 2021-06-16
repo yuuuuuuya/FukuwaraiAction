@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] Player player;
     [SerializeField] LifePanel lifePanel;
     [SerializeField] FacePartsPanel facePartsPanel;
 
@@ -19,7 +18,7 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        lifePanel.UpdateLifeIcons(player.life);
+        lifePanel.UpdateLifeIcons(Player.life);
         facePartsPanel.UpdateFacePartsIcons();
     }
 

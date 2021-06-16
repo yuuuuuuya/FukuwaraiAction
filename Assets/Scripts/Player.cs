@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject restartBtn;
     [SerializeField] GameObject player;
     public bool isGoal { get; set; } = false;
-    public int life { get; set; } = 3;
+    public static int life { get; set; } = 3;
     //FacePartsSpereに衝突時の効果音
     AudioSource audioSource;
     bool ismovedToFoward;

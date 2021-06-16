@@ -18,7 +18,7 @@ public class ManagerSceneLoader : MonoBehaviour
 
     void Update()
     {
-        //playerが落下した際:lifeが0→TitleScene、lifeが1以上→mainScene をロード
+        //playerが落下→lifeが0:TitleScene、lifeが1以上:mainSceneをロード
         Scene MnagerScene = SceneManager.GetSceneByName("MnagerScene");
 
         foreach (GameObject rootGameObject in MnagerScene.GetRootGameObjects())
