@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject destroyPlayer;
     bool isGround; // true→地面についている
     List<GameObject> faceParts = new List<GameObject>();
+    [SerializeField] GameObject faceFoundation;
 
     void Awake()
     {
@@ -162,6 +163,7 @@ public class Player : MonoBehaviour
                 ManagerSceneLoader.isloaded = false;
 
                 // 顔のパーツを表示
+                faceFoundation.SetActive(true);
                 for (int i = 0; i < faceParts.Count; i++)
                 {
                     faceParts[i].GetComponent<MeshRenderer>().enabled = true;
