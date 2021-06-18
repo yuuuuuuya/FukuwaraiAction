@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FacePartsPanel : MonoBehaviour
 {
-    [SerializeField] Player player;
     [SerializeField] GameObject leftEye;
     [SerializeField] GameObject rightEye;
     [SerializeField] GameObject nose;
@@ -12,9 +11,10 @@ public class FacePartsPanel : MonoBehaviour
 
     public void UpdateFacePartsIcons()
     {
-        if (player.hasAttachedLeftEye) leftEye.SetActive(false);
-        if (player.hasAttachedRightEye) rightEye.SetActive(false);
-        if (player.hasAttachedNose) nose.SetActive(false);
-        if (player.hasAttachedMouth) mouth.SetActive(false);
+        // 取得したら顔パーツを非表示
+        if (FaceParts.hasAttachedLeftEye) leftEye.SetActive(false);
+        if (FaceParts.hasAttachedRightEye) rightEye.SetActive(false);
+        if (FaceParts.hasAttachedNose) nose.SetActive(false);
+        if (FaceParts.hasAttachedMouth) mouth.SetActive(false);
     }
 }

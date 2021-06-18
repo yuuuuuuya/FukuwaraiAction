@@ -5,48 +5,48 @@ using UnityEngine.SceneManagement;
 
 public class FaceParts : MonoBehaviour
 {
-    [SerializeField] string sceneName;
     AudioSource audioSource;
+
+    [SerializeField] string sceneName;
+    
+    public static bool hasAttachedRightEye { get; set; } = false; // true→取得済み
+    public static bool hasAttachedLeftEye { get; set; } = false; // true→取得済み
+    public static bool hasAttachedNose { get; set; } = false; // true→取得済み
+    public static bool hasAttachedMouth { get; set; } = false; // true→取得済み
 
     void Start()
     {
-        //各シーンで顔パーツを取得済みなら顔パーツobjectを非表示
-        Scene managerScene = SceneManager.GetSceneByName("MnagerScene");
-        Player player;
-
-        foreach (GameObject rootGameObject in managerScene.GetRootGameObjects())
-        {
-            player = rootGameObject.GetComponent<Player>();
-            if (player == null) continue;
-            switch (sceneName)
-            {
-                case "LeftEyeScene":
-                    if (player.hasAttachedLeftEye) gameObject.SetActive(false);
-                    break;
-                case "RightEyeScene":
-                    if (player.hasAttachedRightEye) gameObject.SetActive(false);
-                    break;
-                case "NoseScene":
-                    if (player.hasAttachedNose) gameObject.SetActive(false);
-                    break;
-                case "MouthScene":
-                    if (player.hasAttachedMouth) gameObject.SetActive(false);
-                    break;
-                default:
-                    break;
-            }
-        }
-
         audioSource = GetComponent<AudioSource>();
+
+        //顔パーツを取得済みなら、各シーンで顔パーツobjectを非表示
+        switch (sceneName)
+        {
+            case "LeftEyeScene":
+                if (hasAttachedLeftEye) gameObject.SetActive(false);
+                break;
+            case "RightEyeScene":
+                if (hasAttachedRightEye) gameObject.SetActive(false);
+                break;
+            case "NoseScene":
+                if (hasAttachedNose) gameObject.SetActive(false);
+                break;
+            case "MouthScene":
+                if (hasAttachedMouth) gameObject.SetActive(false);
+                break;
+            default:
+                break;
+        }
     }
 
     void Update()
     {
+        // 顔パーツを動かす
         transform.Rotate(0.0f, 0.0f, 5.0f);
     }
 
     void OnTriggerEnter(Collider other)
     {
+        // playerが衝突→音鳴らす
         if (other.tag == "Player") audioSource.Play();
     }
 }

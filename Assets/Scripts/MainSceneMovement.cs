@@ -9,6 +9,7 @@ public class MainSceneMovement : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        // 顔パーツシーンで、球体にplayerが衝突→Mainシーンへ遷移
         if (other.tag == "Player")
         {
             SceneManager.UnloadSceneAsync(sceneName);
