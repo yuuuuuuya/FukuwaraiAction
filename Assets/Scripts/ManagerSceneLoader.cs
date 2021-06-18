@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class ManagerSceneLoader : MonoBehaviour
 {
     public static bool isloaded = false;
+    
     [SerializeField] string sceneName;
 
     void Awake()
@@ -44,5 +45,8 @@ public class ManagerSceneLoader : MonoBehaviour
                 else return;
             }
         }
+
+        // ゴールしたか確認
+        if(Player.isGoal) isloaded = false;
     }
 }

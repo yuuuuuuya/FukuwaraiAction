@@ -6,187 +6,59 @@ using System.Linq;
 
 public class Player : MonoBehaviour
 {
+    // playerのrigidbody
     Rigidbody rb;
+    //FacePartsSpereに衝突時の効果音
+    AudioSource audioSource;
+    // 前に進む→true
+    bool ismovedToFoward;
+    // 右方向に回転する→true
+    bool isChangedDirectionToRight;
+    // 左方向に回転する→true
+    bool isChangeDirectionToLeft;
+    // ゴール時にインスタンス化するプレファブ
+    GameObject prefabAtGoal;
+    // true→地面についている
+    bool isGround;
+    // 取得したfacePartsオブジェクトのリスト
+    List<GameObject> faceParts = new List<GameObject>();
+
     [SerializeField] float jumpForce;
     [SerializeField] float speedZ;
     [SerializeField] float speedX;
-    Vector3 latestPos;
     [SerializeField] float maxSpeedZ;
     [SerializeField] GameObject fireworks;
     [SerializeField] GameObject mainCamera;
     [SerializeField] AudioSource audioBGM;
     [SerializeField] GameObject restartBtn;
-    [SerializeField] GameObject player;
-    public bool isGoal { get; set; } = false;
-    public static int life { get; set; } = 3;
-    //FacePartsSpereに衝突時の効果音
-    AudioSource audioSource;
-    bool ismovedToFoward;
-    bool isChangedDirectionToRight;
-    bool isChangeDirectionToLeft;
     [SerializeField] Animator charactorAnimator;
-    GameObject obj;
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject destroyPlayer;
-    bool isGround; // true→地面についている
-    List<GameObject> faceParts = new List<GameObject>();
     [SerializeField] GameObject faceFoundation;
+
+    public static bool isGoal { get; set; } = false; // ゴールした→true
+    public static int life { get; set; } = 3;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        Animator charactorAnimator = player.GetComponent<Animator>();
-    }
-
-    void Start()
-    {
-        latestPos = transform.position;
-
         audioSource = GetComponent<AudioSource>();
-
         charactorAnimator.enabled = true;
     }
 
-    void OnTriggerEnter(Collider other)
+    void Update()
     {
-        //顔のパーツののposition
-        Vector3 facePartsPos = new Vector3(0, 0, 0);
-        //顔のパーツののrotation
-        Vector3 facePartsRotVector3 = new Vector3(0, 0, 0);
-        Quaternion facePartsRot = Quaternion.Euler(0.0f, 180.0f, 180.0f);
-        //顔のパーツのscale
-        Vector3 facePartsScale = new Vector3(0, 0, 0);
-        //顔のパーツに触れた
-        bool isAttachedFaceParts = false;
-        //顔のパーツのスクリプト
-        FaceParts facePartsScript;
+        // Animatorにキャラの環境やパラメーターを設定する
+        ApplyAnimatorParameter();
 
-        //衝突した顔のパーツによってpositinを変更
-        switch (other.tag)
-        {
-            case "LeftEye":
-                //顔パーツの回転を停止
-                facePartsScript = other.gameObject.GetComponent<FaceParts>();
-                facePartsScript.enabled = false;
-
-                //顔のパーツをplayerにセット
-                other.GetComponent<MeshCollider>().enabled = false;
-                facePartsPos = new Vector3(0.082f, 6.185f, 0.22f);
-                facePartsScale = new Vector3(0.08f, 0.08f, 0);
-                facePartsRotVector3 = other.gameObject.transform.eulerAngles;
-                facePartsRot = Quaternion.Euler(0.0f, 180.0f, facePartsRotVector3.z);
-
-
-                //各フラグを変更
-                isAttachedFaceParts = true;
-                FaceParts.hasAttachedLeftEye = true;
-                break;
-            case "RightEye":
-                //顔パーツの回転を停止
-                facePartsScript = other.gameObject.GetComponent<FaceParts>();
-                facePartsScript.enabled = false;
-
-                other.GetComponent<MeshCollider>().enabled = false;
-                facePartsPos = new Vector3(-0.066f, 6.184f, 0.22f);
-                facePartsScale = new Vector3(0.08f, 0.08f, 0);
-                facePartsRotVector3 = other.gameObject.transform.eulerAngles;
-                facePartsRot = Quaternion.Euler(0.0f, 180.0f, facePartsRotVector3.z);
-
-                isAttachedFaceParts = true;
-                FaceParts.hasAttachedRightEye = true;
-                break;
-            case "Nose":
-                //顔パーツの回転を停止
-                facePartsScript = other.gameObject.GetComponent<FaceParts>();
-                facePartsScript.enabled = false;
-
-                other.GetComponent<MeshCollider>().enabled = false;
-                facePartsPos = new Vector3(0.016f, 6.1f, 0.22f);
-                facePartsScale = new Vector3(0.07f, 0.07f, 0);
-                facePartsRotVector3 = other.gameObject.transform.eulerAngles;
-                facePartsRot = Quaternion.Euler(0.0f, 180.0f, facePartsRotVector3.z);
-
-                isAttachedFaceParts = true;
-                FaceParts.hasAttachedNose = true;
-                break;
-            case "Mouth":
-                //顔パーツの回転を停止
-                facePartsScript = other.gameObject.GetComponent<FaceParts>();
-                facePartsScript.enabled = false;
-
-                other.GetComponent<MeshCollider>().enabled = false;
-                facePartsPos = new Vector3(0.016f, 5.94f, 0.22f);
-                facePartsScale = new Vector3(0.15f, 0.1f, 0);
-                facePartsRotVector3 = other.gameObject.transform.eulerAngles;
-                facePartsRot = Quaternion.Euler(0.0f, 180.0f, facePartsRotVector3.z);
-
-                isAttachedFaceParts = true;
-                FaceParts.hasAttachedMouth = true;
-                break;
-            case "ReturnMainSphere":
-                audioSource.Play();
-                break;
-            case "Goal":
-                //効果音
-                audioBGM.Stop();
-                other.GetComponent<AudioSource>().Play();
-
-                //ゴールポイントを非表示
-                other.gameObject.GetComponent<MeshRenderer>().enabled = false;
-
-                //花火をplay
-                fireworks.SetActive(true);
-
-                //プレイヤーを固定
-                Rigidbody p_rigidbody = GetComponent<Rigidbody>();
-                p_rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-
-                Transform transformAtGoal = gameObject.transform;
-                Destroy(destroyPlayer);
-                obj = Instantiate(playerPrefab);
-                obj.transform.SetParent(transform);
-                Vector3 pos = new Vector3(0, 5, 0);
-                obj.transform.localPosition = pos;
-                obj.transform.localRotation = Quaternion.Euler(0, 0, 0);
-
-                //カメラでキャラの正面を写すフラグ
-                isGoal = true;
-
-                //リスタートボタン表示
-                restartBtn.SetActive(true);
-
-                //managerSceneのロードフラグをfalse
-                ManagerSceneLoader.isloaded = false;
-
-                // 顔のパーツを表示
-                faceFoundation.SetActive(true);
-                for (int i = 0; i < faceParts.Count; i++)
-                {
-                    faceParts[i].GetComponent<MeshRenderer>().enabled = true;
-                }
-                    break;
-            default:
-                break;
-        }
-
-        //顔のパーツをセット
-        if (isAttachedFaceParts)
-        {
-            //顔のパーツをセット
-            other.gameObject.transform.parent = transform;
-            other.gameObject.transform.localPosition = facePartsPos;
-            other.gameObject.transform.localRotation = facePartsRot;
-            other.gameObject.transform.localScale = facePartsScale;
-
-            // 顔のパーツを非表示
-            faceParts.Add(other.gameObject);
-            faceParts.Last().GetComponent<MeshRenderer>().enabled = false;
-        }
-    }
-
-    void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.tag == "Ground") isGround = true;
+        //デバッグ用
+        if (Input.GetKeyDown(KeyCode.UpArrow)) PointerDownForMoveToForward();
+        if (Input.GetKeyUp(KeyCode.UpArrow)) PointerUpForMoveToForward();
+        if (Input.GetKeyDown(KeyCode.RightArrow)) PointerDownForChangeDirectionToRight();
+        if (Input.GetKeyUp(KeyCode.RightArrow)) PointerUpForChangeDirectionToRight();
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) PointerDownForChangeDirectionToLeft();
+        if (Input.GetKeyUp(KeyCode.LeftArrow)) PointerUpForChangeDirectionToLeft();
+        if (Input.GetKeyDown(KeyCode.Space)) Jump();
     }
 
     public void FixedUpdate()
@@ -219,19 +91,115 @@ public class Player : MonoBehaviour
         }
     }
 
-    void Update()
+    void OnTriggerEnter(Collider other)
     {
-        // Animatorにキャラの環境やパラメーターを設定する
-        ApplyAnimatorParameter();
+        //顔のパーツののposition
+        Vector3 facePartsPos = new Vector3(0, 0, 0);
+        //顔のパーツののrotation
+        Vector3 facePartsRotVector3 = new Vector3(0, 0, 0);
+        Quaternion facePartsRot = Quaternion.Euler(0.0f, 180.0f, 180.0f);
+        //顔のパーツのscale
+        Vector3 facePartsScale = new Vector3(0, 0, 0);
+        //顔のパーツに触れた→true
+        bool isAttachedFaceParts = false;
+        //顔のパーツのスクリプト
+        FaceParts facePartsScript;
 
-        //デバッグ用
-        if (Input.GetKeyDown(KeyCode.UpArrow)) PointerDownForMoveToForward();
-        if (Input.GetKeyUp(KeyCode.UpArrow)) PointerUpForMoveToForward();
-        if (Input.GetKeyDown(KeyCode.RightArrow)) PointerDownForChangeDirectionToRight();
-        if (Input.GetKeyUp(KeyCode.RightArrow)) PointerUpForChangeDirectionToRight();
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) PointerDownForChangeDirectionToLeft();
-        if (Input.GetKeyUp(KeyCode.LeftArrow)) PointerUpForChangeDirectionToLeft();
-        if (Input.GetKeyDown(KeyCode.Space)) Jump();
+        //衝突した顔のパーツによってpositinを変更
+        switch (other.tag)
+        {
+            case "LeftEye":
+                //顔のパーツをplayerにセット
+                facePartsPos = new Vector3(0.082f, 6.185f, 0.22f);
+                facePartsScale = new Vector3(0.08f, 0.08f, 0);
+                //各フラグを変更
+                isAttachedFaceParts = true;
+                FaceParts.hasAttachedLeftEye = true;
+                break;
+            case "RightEye":
+                //顔のパーツをplayerにセット
+                facePartsPos = new Vector3(-0.066f, 6.184f, 0.22f);
+                facePartsScale = new Vector3(0.08f, 0.08f, 0);
+                //各フラグを変更
+                isAttachedFaceParts = true;
+                FaceParts.hasAttachedRightEye = true;
+                break;
+            case "Nose":
+                //顔のパーツをplayerにセット
+                facePartsPos = new Vector3(0.016f, 6.1f, 0.22f);
+                facePartsScale = new Vector3(0.07f, 0.07f, 0);
+                //各フラグを変更
+                isAttachedFaceParts = true;
+                FaceParts.hasAttachedNose = true;
+                break;
+            case "Mouth":
+                //顔のパーツをplayerにセット
+                facePartsPos = new Vector3(0.016f, 5.94f, 0.22f);
+                facePartsScale = new Vector3(0.15f, 0.1f, 0);
+                //各フラグを変更
+                isAttachedFaceParts = true;
+                FaceParts.hasAttachedMouth = true;
+                break;
+            // メインステージへ戻る球体
+            case "ReturnMainSphere":
+                audioSource.Play();
+                break;
+            case "Goal":
+                //効果音
+                audioBGM.Stop();
+                other.GetComponent<AudioSource>().Play();
+                //ゴールポイントを非表示
+                other.gameObject.GetComponent<MeshRenderer>().enabled = false;
+                //花火をplay
+                fireworks.SetActive(true);
+                //プレイヤーを固定
+                rb.constraints = RigidbodyConstraints.FreezeAll;
+                // 顔パーツとplayerのアニメーションが連動出来ない為、
+                // キャラの初期状態を表示
+                Transform transformAtGoal = gameObject.transform;
+                Destroy(destroyPlayer);
+                prefabAtGoal = Instantiate(playerPrefab);
+                prefabAtGoal.transform.SetParent(transform);
+                prefabAtGoal.transform.localPosition = new Vector3(0, 5, 0);;
+                prefabAtGoal.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                //ゴールした→true
+                isGoal = true;
+                //リスタートボタン表示
+                restartBtn.SetActive(true);
+                // 顔のパーツを表示
+                faceFoundation.SetActive(true);
+                for (int i = 0; i < faceParts.Count; i++)
+                {
+                    faceParts[i].GetComponent<MeshRenderer>().enabled = true;
+                }
+                break;
+            default:
+                break;
+        }
+
+        //顔のパーツをセット
+        if (isAttachedFaceParts)
+        {
+            //顔パーツの回転を停止
+            facePartsScript = other.gameObject.GetComponent<FaceParts>();
+            facePartsScript.enabled = false;
+            //顔のパーツをセット
+            other.gameObject.transform.parent = transform;
+            other.gameObject.transform.localPosition = facePartsPos;
+            facePartsRotVector3 = other.gameObject.transform.eulerAngles;
+            facePartsRot = Quaternion.Euler(0.0f, 180.0f, facePartsRotVector3.z);
+            other.gameObject.transform.localRotation = facePartsRot;
+            other.gameObject.transform.localScale = facePartsScale;
+            // 顔のパーツを非表示
+            faceParts.Add(other.gameObject);
+            faceParts.Last().GetComponent<MeshRenderer>().enabled = false;
+            faceParts.Last().GetComponent<MeshCollider>().enabled = false;
+        }
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Ground") isGround = true;
     }
 
     void ApplyAnimatorParameter()

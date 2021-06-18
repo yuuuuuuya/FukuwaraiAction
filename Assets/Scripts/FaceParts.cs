@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class FaceParts : MonoBehaviour
 {
-    [SerializeField] string sceneName;
     AudioSource audioSource;
+
+    [SerializeField] string sceneName;
+    
     public static bool hasAttachedRightEye { get; set; } = false; // true→取得済み
     public static bool hasAttachedLeftEye { get; set; } = false; // true→取得済み
     public static bool hasAttachedNose { get; set; } = false; // true→取得済み

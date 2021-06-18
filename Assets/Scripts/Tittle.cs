@@ -7,14 +7,15 @@ public class Tittle : MonoBehaviour
 {
     public void OnStartButtonClicked()
     {
-        // 顔パーツ取得済みかのプロパティをリセット
+        // 各プロパティをリセット
         FaceParts.hasAttachedLeftEye = false;
         FaceParts.hasAttachedMouth = false;
         FaceParts.hasAttachedNose = false;
         FaceParts.hasAttachedRightEye = false;
 
-        //lifeプロパティをリセット
         Player.life = 3;
+
+        Player.isGoal = false;
 
         // Mainシーンをロード
         SceneManager.LoadScene("MainScene");

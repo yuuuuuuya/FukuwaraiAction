@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class FacePartsSceneMovement : MonoBehaviour
 {
-    [SerializeField] string sceneName;
     Material facePartsSpherMaterial;
+
+    [SerializeField] string sceneName;
 
     void Start()
     {
