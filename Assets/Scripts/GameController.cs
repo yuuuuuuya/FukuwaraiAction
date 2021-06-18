@@ -6,25 +6,27 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] PlayerController player;
     [SerializeField] LifePanel lifePanel;
     [SerializeField] FacePartsPanel facePartsPanel;
 
     void Awake()
     {
-        //デバッグ用
+        // デバッグ用
+        // Managerシーンでゲーム開始→Mainシーンをロード
         if (ManagerSceneLoader.isloaded) return;
         SceneManager.LoadScene("MainScene");
     }
 
     void Update()
     {
-        lifePanel.UpdateLifeIcons(player.life);
+        // 残らいふを随時チェックし、ライフパネルを更新
+        lifePanel.UpdateLifeIcons(Player.life);
         facePartsPanel.UpdateFacePartsIcons();
     }
 
     public void OnRestartButtonClicked()
     {
+        // リスタートボタンクリック→タイトルシーンへ
         SceneManager.LoadScene("TitleScene");
     }
 }

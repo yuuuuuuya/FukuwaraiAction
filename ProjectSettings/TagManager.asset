@@ -10,6 +10,7 @@ TagManager:
   - Mouth
   - Goal
   - ReturnMainSphere
+  - Ground
   layers:
   - Default
   - TransparentFX
