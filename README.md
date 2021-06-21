@@ -13,7 +13,7 @@
 [![demo](https://github.com/yuuuuuuya/FukuwaraiAction/wiki/fukuwaraiAction.gif)](https://github.com/yuuuuuuya/FukuwaraiAction/wiki/fukuwaraiAction.gif)
 
 
-## implementation
+## Implementation
 - 複数のSceneを同時ロード<br>
 前のシーンの情報を残しておきたいPlayerオブジェクトとUIをManagerシーンに配置。<br>
 5つあるステージは別シーンにわけ、ステージ切替は"UnloadSceneAsync"で現在のステージシーンのみをアンロード。<br>
